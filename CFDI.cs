@@ -694,14 +694,14 @@ namespace NoriCFDI
 
             return false;
         }
-        public string Cancelar(string uuid, string rfc_receptor, double total)
+        public string Cancelar(string uuid, string rfc_receptor, double total, string motivo, string sustitucion)
         {
             try
             {
                 if (pac == 0)
                 {
                     PACS.EDICOM servicio = new PACS.EDICOM(usuario, contraseña, modo_prueba);
-                    return servicio.CancelarUUID(uuid, rfc_receptor, total, empresa.rfc, File.ReadAllBytes(certificado.pfx), certificado.contraseña_pfx);
+                    return servicio.CancelarUUID(uuid, rfc_receptor, total, motivo, sustitucion, empresa.rfc, File.ReadAllBytes(certificado.pfx), certificado.contraseña_pfx);
                 }
                 else
                 {

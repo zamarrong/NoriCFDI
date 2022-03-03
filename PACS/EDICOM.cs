@@ -118,10 +118,10 @@ namespace NoriCFDI.PACS
             try
             {
                 string[] uuid = new string[] { documento_electronico.folio_fiscal };
-                servicio.cancelaCFDiAsync(usuario, contraseña, rfc, uuid, pfx, contraseña_pfx);
+                servicio.cancelaCFDiAsync(usuario, contraseña, rfc, uuid, pfx, contraseña_pfx, documento_electronico.motivo, documento_electronico.folio_fiscal_sustitucion);
                 var documento = (documento_electronico.documento_id != 0) ? Documento.Documentos().Where(x => x.id == documento_electronico.documento_id).Select(x => new { x.socio_id, x.total }).First() : Pago.Pagos().Where(x => x.id == documento_electronico.pago_id).Select(x => new { x.socio_id, x.total }).First();
                 string rfc_receptor = Socio.Socios().Where(x => x.id == documento.socio_id).Select(x => x.rfc).First();
-                Edicom.CancelData respuesta = servicio.cancelCFDiAsync(usuario, contraseña, rfc, rfc_receptor, documento_electronico.folio_fiscal, Math.Round(Convert.ToDouble(documento.total), 2), pfx, contraseña_pfx, modo_prueba);
+                Edicom.CancelData respuesta = servicio.cancelCFDiAsync(usuario, contraseña, rfc, rfc_receptor, documento_electronico.folio_fiscal, Math.Round(Convert.ToDouble(documento.total), 2), pfx, contraseña_pfx, documento_electronico.motivo, documento_electronico.folio_fiscal_sustitucion, modo_prueba);
                 documento_electronico.estado = 'C';
                 documento_electronico.mensaje = string.Format("{0} - ({1}) | {2} - {3}", respuesta.status, respuesta.statusCode, respuesta.cancelQueryData.cancelStatus, respuesta.cancelQueryData.isCancelable);
             }
@@ -139,13 +139,13 @@ namespace NoriCFDI.PACS
             return documento_electronico;
         }
 
-        public string CancelarUUID(string uuid, string rfc_receptor, double total, string rfc, byte[] pfx, string contraseña_pfx)
+        public string CancelarUUID(string uuid, string rfc_receptor, double total, string motivo, string sustitucion, string rfc, byte[] pfx, string contraseña_pfx)
         {
             try
             {
                 string[] uuids = new string[] { uuid };
-                servicio.cancelaCFDiAsync(usuario, contraseña, rfc, uuids, pfx, contraseña_pfx);;
-                Edicom.CancelData respuesta = servicio.cancelCFDiAsync(usuario, contraseña, rfc, rfc_receptor, uuid, total, pfx, contraseña_pfx, modo_prueba);
+                servicio.cancelaCFDiAsync(usuario, contraseña, rfc, uuids, pfx, contraseña_pfx, motivo, sustitucion);
+                Edicom.CancelData respuesta = servicio.cancelCFDiAsync(usuario, contraseña, rfc, rfc_receptor, uuid, total, pfx, contraseña_pfx, motivo, sustitucion, modo_prueba);
                 return string.Format("{0} - ({1}) | {2} - {3}", respuesta.status, respuesta.statusCode, respuesta.cancelQueryData.cancelStatus, respuesta.cancelQueryData.isCancelable);
             }
             catch (CFDiException CFDIe)
