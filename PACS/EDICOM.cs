@@ -40,7 +40,7 @@ namespace NoriCFDI.PACS
 
                 try
                 {
-                    XNamespace cfdi = @"http://www.sat.gob.mx/cfd/3";
+                    XNamespace cfdi = @"http://www.sat.gob.mx/cfd/4";
                     XNamespace tfd = @"http://www.sat.gob.mx/TimbreFiscalDigital";
 
                     var xdoc = XDocument.Load(ruta_xml);

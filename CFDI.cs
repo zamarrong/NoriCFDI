@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.Services.Discovery;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -85,8 +86,6 @@ namespace NoriCFDI
                         string numero_certificado, inicio, final, serie;
                         SelloDigital.LeerCER(certificado.cer, out inicio, out final, out serie, out numero_certificado);
 
-                        comprobante.Version = "3.3";
-
                         comprobante.Serie = Serie.Series().Where(x => x.id == documento.serie_id).Select(x => x.nombre).First();
                         comprobante.Folio = documento.numero_documento.ToString();
 
@@ -101,7 +100,7 @@ namespace NoriCFDI
                             comprobante.TipoCambio = Math.Round(documento.tipo_cambio, 2);
 
                         comprobante.TipoDeComprobante = (documento.clase.Equals("FA") || documento.clase.Equals("AC") || documento.clase.Equals("ND")) ? "I" : "E";
-                        comprobante.LugarExpedicion = empresa.cp;
+                        comprobante.LugarExpedicion = empresa.lugar_expedicion;
 
                         if (documento.clase.Equals("TS") || documento.clase.Equals("EN"))
                         {
@@ -122,17 +121,31 @@ namespace NoriCFDI
                         emisor.RegimenFiscal = empresa.regimen_fiscal;
 
                         //Receptor
-                        var socio = Socio.Socios().Where(x => x.id == documento.socio_id).Select(x => new { x.rfc, x.nombre }).First();
+                        var socio = Socio.Socios().Where(x => x.id == documento.socio_id).Select(x => new { x.rfc, x.nombre, x.regimen_fiscal }).First();
                         ComprobanteReceptor receptor = new ComprobanteReceptor();
-                        receptor.Rfc = (rfc.IsNullOrEmpty()) ? socio.rfc : rfc;
-                        receptor.Nombre = socio.nombre;
-                        receptor.UsoCFDI = (documento.uso_principal.IsNullOrEmpty()) ? "P01" : documento.uso_principal;
+                        if (comprobante.TipoDeComprobante == "T")
+                        {
+                            receptor.Rfc = emisor.Rfc;
+                            receptor.Nombre = emisor.Nombre;
+                            receptor.UsoCFDI = "S01";
+                            receptor.RegimenFiscalReceptor = emisor.RegimenFiscal;
+                            receptor.DomicilioFiscalReceptor = empresa.cp;
+                        }
+                        else
+                        {
+                            receptor.Rfc = (rfc.IsNullOrEmpty()) ? socio.rfc : rfc;
+                            receptor.Nombre = socio.nombre;
+                            receptor.UsoCFDI = (receptor.Rfc == "XAXX010101000") ? "S01" : (documento.uso_principal.IsNullOrEmpty()) ? "G03" : documento.uso_principal;
+                            receptor.RegimenFiscalReceptor = (receptor.Rfc == "XAXX010101000") ? "616" : socio.regimen_fiscal;
+                            Socio.Direccion direccion_fiscal = Socio.Direccion.Obtener(documento.direccion_facturacion_id);
+                            receptor.DomicilioFiscalReceptor = (receptor.Rfc == "XAXX010101000") ? comprobante.LugarExpedicion : direccion_fiscal.cp;
+                        }
 
                         //Asignar (Emisor / Receptor)
                         comprobante.Emisor = emisor;
                         comprobante.Receptor = receptor;
 
-                        List<ComprobanteConcepto> conceptos = new List<ComprobanteConcepto>();
+                        List <ComprobanteConcepto> conceptos = new List<ComprobanteConcepto>();
                         List<Impuesto.Linea.Impuesto> clases_impuestos = Impuesto.Linea.Impuesto.Impuestos();
                         List<Impuesto.TipoFactor> tipos_factores = Impuesto.TipoFactor.Tipos();
                         foreach (Documento.Partida partida in documento.partidas)
@@ -144,6 +157,7 @@ namespace NoriCFDI
                             concepto.NoIdentificacion = (partida.codigo_barras.IsNullOrEmpty()) ? partida.sku : partida.codigo_barras;
                             concepto.ClaveProdServ = (articulo.codigo_clasificacion.IsNullOrEmpty()) ? "01010101" : articulo.codigo_clasificacion;
                             concepto.Cantidad = Math.Round(partida.cantidad, 4);
+                            concepto.ObjetoImp = (comprobante.TipoDeComprobante == "T") ? c_ObjetoImp.Item01 : c_ObjetoImp.Item02;
                             var unidad_medida = UnidadMedida.UnidadesMedida().Where(x => x.id == partida.unidad_medida_id).First();
                             if (!unidad_medida.IsNullOrEmpty())
                             {
@@ -168,11 +182,24 @@ namespace NoriCFDI
                                 concepto.InformacionAduanera = aduanas.ToArray();
                             }
 
-                            if (partida.porcentaje_descuento > 0)
-                                concepto.Descuento = Math.Round((((partida.porcentaje_descuento) / 100) * concepto.Importe), 2);
+                            if (partida.porcentaje_descuento > 0 && documento.porcentaje_descuento > 0)
+                            {
+                                var descuento1 = Math.Round((((partida.porcentaje_descuento) / 100) * concepto.Importe), 2);
+                                var descuento2 = Math.Round((((documento.porcentaje_descuento) / 100) * (concepto.Importe - descuento1)), 2);
+                                concepto.Descuento = descuento1 + descuento2;
+                            }
+                            else
+                            {
+                                if (partida.porcentaje_descuento > 0)
+                                {
+                                    concepto.Descuento = Math.Round((((partida.porcentaje_descuento) / 100) * concepto.Importe), 2);
+                                }
 
-                            if (documento.porcentaje_descuento > 0)
-                                concepto.Descuento = Math.Round(((documento.porcentaje_descuento) / 100) * (concepto.Importe), 2);
+                                if (documento.porcentaje_descuento > 0)
+                                {
+                                    concepto.Descuento += Math.Round(((documento.porcentaje_descuento) / 100) * (concepto.Importe), 2);
+                                }
+                            }
 
                             if (!comprobante.TipoDeComprobante.Equals("T"))
                             {
@@ -222,11 +249,13 @@ namespace NoriCFDI
                                     if (comprobante_traslados.Any(x => x.TasaOCuota == traslado.TasaOCuota))
                                     {
                                         comprobante_traslados.Where(x => x.TasaOCuota == traslado.TasaOCuota).First().Importe += traslado.Importe;
+                                        comprobante_traslados.Where(x => x.TasaOCuota == traslado.TasaOCuota).First().Base += traslado.Base;
                                     }
                                     else
                                     {
                                         ComprobanteImpuestosTraslado comprobante_traslado = new ComprobanteImpuestosTraslado();
 
+                                        comprobante_traslado.Base = traslado.Base;
                                         comprobante_traslado.Impuesto = traslado.Impuesto;
                                         comprobante_traslado.TasaOCuota = traslado.TasaOCuota;
                                         comprobante_traslado.TipoFactor = traslado.TipoFactor;
@@ -348,15 +377,15 @@ namespace NoriCFDI
                         if (comprobante.TipoDeComprobante == "T")
                         {
                             comprobante.Moneda = "XXX";
-                            comprobante.Complemento = GenerarComplementoCartaPorte(documento, receptor.Rfc).ToArray();
+                            comprobante.Complemento = GenerarComplementoCartaPorte(documento, receptor.Rfc).First();
                         }
 
-                        if (comprobante.TipoDeComprobante == "T" && comprobante.Complemento.Length == 0)
+                        if (comprobante.TipoDeComprobante == "T" && comprobante.Complemento.IsNullOrEmpty())
                             return false;
 
                         //Cadena original y sello
                         string cadena_original = string.Empty;
-                        string ruta_xsl = directorio_xml + @"\cadenaoriginal_3_3.xslt";
+                        string ruta_xsl = directorio_xml + @"\cadenaoriginal_4_0.xslt";
                         
                         
                         GenerarXML(comprobante, ruta_xml);
@@ -435,8 +464,6 @@ namespace NoriCFDI
                         string numero_certificado, inicio, final, serie;
                         SelloDigital.LeerCER(certificado.cer, out inicio, out final, out serie, out numero_certificado);
 
-                        comprobante.Version = "3.3";
-
                         comprobante.Serie = Serie.Series().Where(x => x.id == documento.serie_id).Select(x => x.nombre).First();
                         comprobante.Folio = documento.numero_documento.ToString();
 
@@ -451,7 +478,7 @@ namespace NoriCFDI
                             comprobante.TipoCambio = Math.Round(documento.tipo_cambio, 2);
 
                         comprobante.TipoDeComprobante = "I";
-                        comprobante.LugarExpedicion = empresa.cp;
+                        comprobante.LugarExpedicion = empresa.lugar_expedicion;
 
                         var metodo_pago = MetodoPago.MetodosPago().Where(x => x.id == documento.metodo_pago_id).Select(x => x.codigo).First();
 
@@ -464,10 +491,19 @@ namespace NoriCFDI
                         emisor.RegimenFiscal = empresa.regimen_fiscal;
 
                         //Receptor
-                        var socio = Socio.Socios().Where(x => x.id == documento.socio_id).Select(x => new { x.rfc, x.nombre }).First();
+                        var socio = Socio.Socios().Where(x => x.id == documento.socio_id).Select(x => new { x.rfc, x.nombre, x.regimen_fiscal }).First();
                         ComprobanteReceptor receptor = new ComprobanteReceptor();
                         receptor.Rfc = (rfc.IsNullOrEmpty()) ? socio.rfc : rfc;
-                        receptor.UsoCFDI = "P01";
+                        receptor.Nombre = (receptor.Rfc == "XAXX010101000") ? "PUBLICO EN GENERAL" : socio.nombre;
+                        receptor.UsoCFDI = (receptor.Rfc == "XAXX010101000") ? "S01" : documento.uso_principal;
+                        receptor.RegimenFiscalReceptor = (receptor.Rfc == "XAXX010101000") ? "616" : socio.regimen_fiscal;
+                        Socio.Direccion direccion_fiscal = Socio.Direccion.Obtener(documento.direccion_facturacion_id);
+
+                        receptor.DomicilioFiscalReceptor = (receptor.Rfc == "XAXX010101000") ? comprobante.LugarExpedicion : direccion_fiscal.cp;
+
+                        comprobante.InformacionGlobal = new ComprobanteInformacionGlobal();
+                        comprobante.InformacionGlobal.Periodicidad = c_Periodicidad.Item01;
+                        comprobante.InformacionGlobal.Año = (short)DateTime.Today.Year;
 
                         //Asignar (Emisor / Receptor)
                         comprobante.Emisor = emisor;
@@ -482,24 +518,24 @@ namespace NoriCFDI
                             ComprobanteConcepto concepto = new ComprobanteConcepto();
                             var documento_relacionado = Documento.Documentos().Where(x => x.id == relacion).Select(x => new { x.numero_documento, x.tipo_cambio, x.porcentaje_descuento, x.descuento, x.subtotal, x.impuesto, x.total }).First();
 
-                            concepto.Importe = Math.Round(documento.partidas.Where(x => x.documento_base_id == relacion).Sum(x => x.subtotal), 2);
+                            concepto.Importe = Math.Round(documento_relacionado.subtotal, 2);
                             concepto.NoIdentificacion = documento_relacionado.numero_documento.ToString();
                             concepto.ClaveProdServ = "01010101";
                             concepto.Cantidad = 1;
                             concepto.ClaveUnidad = "ACT";
                             concepto.Descripcion = "Venta";
+                            concepto.ObjetoImp = c_ObjetoImp.Item02;
                             concepto.ValorUnitario = concepto.Importe;
 
                             try
                             {
-                                if (documento_relacionado.porcentaje_descuento > 0)
-                                    concepto.Descuento = Math.Round((((documento.partidas.Where(x => x.documento_base_id == relacion).Sum(x => x.porcentaje_descuento) / documento.partidas.Where(x => x.documento_base_id == relacion).Count()) / 100) * concepto.Importe), 2);
-                            } catch {
+                                if (documento_relacionado.descuento > 0)
+                                    concepto.Descuento = Math.Round(documento_relacionado.descuento, 2);
+                            }
+                            catch
+                            {
                                 concepto.Descuento = 0;
                             }
-
-                            if (documento.porcentaje_descuento > 0)
-                                concepto.Descuento = concepto.Descuento + Math.Round((((documento.porcentaje_descuento) / 100) * (concepto.Importe - concepto.Descuento)), 2);
 
                             //Impuestos
                             ComprobanteConceptoImpuestos impuestos = new ComprobanteConceptoImpuestos();
@@ -542,11 +578,13 @@ namespace NoriCFDI
                                 if (comprobante_traslados.Any(x => x.TasaOCuota == traslado.TasaOCuota))
                                 {
                                     comprobante_traslados.Where(x => x.TasaOCuota == traslado.TasaOCuota).First().Importe += traslado.Importe;
+                                    comprobante_traslados.Where(x => x.TasaOCuota == traslado.TasaOCuota).First().Base += traslado.Base;
                                 }
                                 else
                                 {
                                     ComprobanteImpuestosTraslado comprobante_traslado = new ComprobanteImpuestosTraslado();
 
+                                    comprobante_traslado.Base = traslado.Base;
                                     comprobante_traslado.Impuesto = traslado.Impuesto;
                                     comprobante_traslado.TasaOCuota = traslado.TasaOCuota;
                                     comprobante_traslado.TipoFactor = traslado.TipoFactor;
@@ -595,7 +633,7 @@ namespace NoriCFDI
 
                         //Cadena original y sello
                         string cadena_original = string.Empty;
-                        string ruta_xsl = directorio_xml + @"\cadenaoriginal_3_3.xslt";
+                        string ruta_xsl = directorio_xml + @"\cadenaoriginal_4_0.xslt";
 
                         GenerarXML(comprobante, ruta_xml);
 
@@ -749,12 +787,11 @@ namespace NoriCFDI
                 if (documento_electronico.estado != 'A')
                 {
                     Comprobante comprobante = new Comprobante();
-                    comprobante.xsiSchemaLocation += " http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xsd";
+                    //comprobante.xsiSchemaLocation += " http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos20.xsd";
 
                     string numero_certificado, inicio, final, serie;
                     SelloDigital.LeerCER(certificado.cer, out inicio, out final, out serie, out numero_certificado);
 
-                    comprobante.Version = "3.3";
                     comprobante.Serie = Serie.Series().Where(x => x.id == pago.serie_id).Select(x => x.nombre).First();
                     comprobante.Folio = pago.numero_documento.ToString();
                     comprobante.Fecha = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
@@ -762,7 +799,7 @@ namespace NoriCFDI
                     comprobante.Moneda = "XXX";
 
                     comprobante.TipoDeComprobante = "P";
-                    comprobante.LugarExpedicion = empresa.cp;
+                    comprobante.LugarExpedicion = empresa.lugar_expedicion;
 
                     //Emisor
                     ComprobanteEmisor emisor = new ComprobanteEmisor();
@@ -771,11 +808,15 @@ namespace NoriCFDI
                     emisor.RegimenFiscal = empresa.regimen_fiscal;
 
                     //Receptor
-                    var socio = Socio.Socios().Where(x => x.id == pago.socio_id).Select(x => new { x.rfc, x.nombre, x.uso_principal }).First();
+                    var socio = Socio.Socios().Where(x => x.id == pago.socio_id).Select(x => new { x.rfc, x.nombre, x.uso_principal, x.regimen_fiscal, x.direccion_facturacion_id }).First();
                     ComprobanteReceptor receptor = new ComprobanteReceptor();
                     receptor.Rfc = socio.rfc;
                     receptor.Nombre = socio.nombre;
-                    receptor.UsoCFDI = "P01";
+                    receptor.UsoCFDI = "CP01";
+                    receptor.RegimenFiscalReceptor = (receptor.Rfc == "XAXX010101000") ? "616" : socio.regimen_fiscal;
+                    Socio.Direccion direccion_fiscal = Socio.Direccion.Obtener(socio.direccion_facturacion_id);
+
+                    receptor.DomicilioFiscalReceptor = (receptor.Rfc == "XAXX010101000") ? comprobante.LugarExpedicion : direccion_fiscal.cp;
 
                     //Asignar (Emisor / Receptor)
                     comprobante.Emisor = emisor;
@@ -794,6 +835,7 @@ namespace NoriCFDI
                     concepto.ClaveUnidad = "ACT";
                     concepto.Descripcion = "Pago";
                     concepto.ValorUnitario = 0;
+                    concepto.ObjetoImp = c_ObjetoImp.Item01;
 
                     //Agrega el concepto
                     conceptos.Add(concepto);
@@ -810,34 +852,32 @@ namespace NoriCFDI
                     ComprobanteComplemento complemento = new ComprobanteComplemento();
 
                     Pagos complemento_pagos = new Pagos();
-                    complemento_pagos.Version = "1.0";
+                    complemento_pagos.Version = "2.0";
+
+                    complemento_pagos.Totales = new PagosTotales();
 
                     PagosPago complemento_pago = new PagosPago();
                     complemento_pago.FechaPago = pago.fecha_contabilizacion.ToString("yyyy-MM-ddTHH:mm:ss");
+
                     complemento_pago.MonedaP = Moneda.Monedas().Where(x => x.id == pago.moneda_id).Select(x => x.codigo).First();
 
                     if (complemento_pago.MonedaP == "MXP" || complemento_pago.MonedaP == "$")
                         complemento_pago.MonedaP = "MXN";
 
-                    if (complemento_pago.MonedaP != "MXN")
-                    {
-                        complemento_pago.TipoCambioP = Math.Round(pago.tipo_cambio, 4);
-                        complemento_pago.Monto = Math.Round(pago.flujo.Sum(x => x.importe), 2);
-                    }
-                    else
-                    {
-                        complemento_pago.Monto = Math.Round(pago.total, 2);
-                    }
-
-                    complemento_pago.FormaDePagoP = MetodoPago.MetodosPago().Where(x => x.id == pago.metodo_pago_id).Select(x => x.codigo).First();   
+                    complemento_pago.FormaDePagoP = MetodoPago.MetodosPago().Where(x => x.id == pago.metodo_pago_id).Select(x => x.codigo).First(); 
 
                     List<PagosPagoDoctoRelacionado> documentos_relacionados = new List<PagosPagoDoctoRelacionado>();
+                    List<PagosPagoDoctoRelacionadoImpuestosDRTrasladoDR> _traslados_dr = new List<PagosPagoDoctoRelacionadoImpuestosDRTrasladoDR>();
+                    
+                    //Para impuestos
+                    List<Impuesto.Linea.Impuesto> _clases_impuestos = Impuesto.Linea.Impuesto.Impuestos();
+                    List<Impuesto.TipoFactor> _tipos_factores = Impuesto.TipoFactor.Tipos();
                     foreach (Pago.Partida partida in pago.partidas)
                     {
                         PagosPagoDoctoRelacionado documento_relacionado = new PagosPagoDoctoRelacionado();
 
                         var folio_fiscal_relacionado = DocumentoElectronico.DocumentosElectronicos().Where(x => x.documento_id == partida.documento_id).Select(x => x.folio_fiscal).First();
-                        var documento = Documento.Documentos().Where(x => x.id == partida.documento_id).Select(x => new { x.clase, x.serie_id, x.numero_documento, x.metodo_pago_id, x.moneda_id, x.tipo_cambio, x.total, x.importe_aplicado }).First();
+                        var documento = Documento.Documentos().Where(x => x.id == partida.documento_id).Select(x => new { x.id, x.clase, x.serie_id, x.numero_documento, x.metodo_pago_id, x.moneda_id, x.tipo_cambio, x.total, x.importe_aplicado }).First();
 
                         if (documento.clase.Equals("FA") || documento.clase.Equals("NC"))
                         {
@@ -845,17 +885,13 @@ namespace NoriCFDI
                             documento_relacionado.Serie = Serie.Series().Where(x => x.id == documento.serie_id).Select(x => x.nombre).First();
                             documento_relacionado.Folio = documento.numero_documento.ToString();
                             var metodo_pago = MetodoPago.MetodosPago().Where(x => x.id == documento.metodo_pago_id).Select(x => x.codigo).First();
-                            documento_relacionado.MetodoDePagoDR = (metodo_pago.Equals("99")) ? "PPD" : "PUE";
                             documento_relacionado.MonedaDR = Moneda.Monedas().Where(x => x.id == documento.moneda_id).Select(x => x.codigo).First();
 
                             if (documento_relacionado.MonedaDR == "MXP" || documento_relacionado.MonedaDR == "$")
                                 documento_relacionado.MonedaDR = "MXN";
 
-                            if (documento_relacionado.MonedaDR != complemento_pago.MonedaP)
-                                documento_relacionado.TipoCambioDR = Math.Round(1 / partida.tipo_cambio, 4);
-
-                            if (documento_relacionado.MetodoDePagoDR.Equals("PPD"))
-                                documento_relacionado.NumParcialidad = "1";
+                            documento_relacionado.EquivalenciaDR = (documento_relacionado.MonedaDR == "MXN") ? 1 : Math.Round((partida.importe / (partida.tipo_cambio * partida.importe)), 6);
+                            documento_relacionado.NumParcialidad = "1";
 
                             decimal importe_aplicado = documento.importe_aplicado;
                             if (documento.importe_aplicado > documento.total)
@@ -865,20 +901,140 @@ namespace NoriCFDI
                             documento_relacionado.ImpPagado = Math.Round(partida.importe, 2);
                             documento_relacionado.ImpSaldoInsoluto = Math.Round(documento_relacionado.ImpSaldoAnt - documento_relacionado.ImpPagado, 2);
 
+                            documento_relacionado.ObjetoImpDR = c_ObjetoImp.Item02;
+                            documento_relacionado.ImpuestosDR = new PagosPagoDoctoRelacionadoImpuestosDR();
+
+                            List<PagosPagoDoctoRelacionadoImpuestosDRTrasladoDR> traslados_dr = new List<PagosPagoDoctoRelacionadoImpuestosDRTrasladoDR>();
+
+                            //Obtiene los impuestos de las partidas del documento relacionado
+                            List<Documento.Partida> _partidas = Documento.Partida.Partidas().Where(x => x.documento_id == documento.id).ToList();
+                            List<ComprobanteConceptoImpuestosTraslado> _traslados = new List<ComprobanteConceptoImpuestosTraslado>();
+                            foreach (Documento.Partida _partida in _partidas)
+                            {
+                                ComprobanteConcepto _concepto = new ComprobanteConcepto();
+                                //Impuestos partidas
+                                
+                                foreach (Impuesto.Linea impuesto in Impuesto.ObtenerLineas(_partida.impuesto_id))
+                                {
+                                    ComprobanteConceptoImpuestosTraslado _traslado = new ComprobanteConceptoImpuestosTraslado();
+
+                                    _traslado.TasaOCuota = decimal.Parse((impuesto.porcentaje / 100).ToString("0.000000"));
+                                    _traslado.Base = Math.Round(_partida.subtotal, 2);
+                                    _traslado.Importe = Math.Round(_traslado.Base * _traslado.TasaOCuota, 2);
+                                    _traslado.TipoFactor = tipos_factores.Where(x => x.tipo == Impuesto.Impuestos().Where(i => i.id == _partida.impuesto_id).Select(i => i.tipo_factor).First()).Select(x => x.nombre).First();
+                                    _traslado.Impuesto = clases_impuestos.Where(x => x.nombre == impuesto.impuesto).Select(x => x.codigo).First();
+                                    _traslados.Add(_traslado);
+                                }
+                            }
+
+                            //Recorre y asigna los traslados
+                            foreach(var tasa_o_cuoata in _traslados.GroupBy(x => x.TasaOCuota).Select(x => x.Key).ToList())
+                            {
+                                PagosPagoDoctoRelacionadoImpuestosDRTrasladoDR traslado_dr = new PagosPagoDoctoRelacionadoImpuestosDRTrasladoDR
+                                {
+                                    BaseDR = _traslados.Where(x => x.TasaOCuota == tasa_o_cuoata).Sum(x => x.Base),
+                                    ImpuestoDR = _traslados.Where(x => x.TasaOCuota == tasa_o_cuoata).First().Impuesto,
+                                    TipoFactorDR = _traslados.Where(x => x.TasaOCuota == tasa_o_cuoata).First().TipoFactor,
+                                    TasaOCuotaDR = _traslados.Where(x => x.TasaOCuota == tasa_o_cuoata).First().TasaOCuota,
+                                    ImporteDR = Math.Round(_traslados.Where(x => x.TasaOCuota == tasa_o_cuoata).Sum(x => x.Base * x.TasaOCuota), 2)
+                                };
+
+                                PagosPagoDoctoRelacionadoImpuestosDRTrasladoDR _traslado_dr = new PagosPagoDoctoRelacionadoImpuestosDRTrasladoDR
+                                {
+                                    BaseDR = _traslados.Where(x => x.TasaOCuota == tasa_o_cuoata).Sum(x => x.Base),
+                                    ImpuestoDR = _traslados.Where(x => x.TasaOCuota == tasa_o_cuoata).First().Impuesto,
+                                    TipoFactorDR = _traslados.Where(x => x.TasaOCuota == tasa_o_cuoata).First().TipoFactor,
+                                    TasaOCuotaDR = _traslados.Where(x => x.TasaOCuota == tasa_o_cuoata).First().TasaOCuota,
+                                    ImporteDR = Math.Round(_traslados.Where(x => x.TasaOCuota == tasa_o_cuoata).Sum(x => x.Base * x.TasaOCuota), 2)
+                                };
+
+                                traslados_dr.Add(traslado_dr);
+                                _traslado_dr.BaseDR = Math.Round(_traslado_dr.BaseDR / documento_relacionado.EquivalenciaDR, 2);
+                                _traslado_dr.ImporteDR = Math.Round(_traslado_dr.ImporteDR / documento_relacionado.EquivalenciaDR, 2);
+                                _traslados_dr.Add(_traslado_dr);
+                            }
+
+                            documento_relacionado.ImpuestosDR.TrasladosDR = traslados_dr.ToArray();
                             documentos_relacionados.Add(documento_relacionado);
                         }
                     }
 
                     complemento_pago.DoctoRelacionado = documentos_relacionados.ToArray();
+
+                    List<PagosPagoImpuestosPTrasladoP> traslados_p = new List<PagosPagoImpuestosPTrasladoP>();
+                    foreach (PagosPagoDoctoRelacionadoImpuestosDRTrasladoDR traslado in _traslados_dr)
+                    {
+                        if (traslados_p.Any(x => x.TasaOCuotaP == traslado.TasaOCuotaDR))
+                        {
+                            traslados_p.Where(x => x.TasaOCuotaP == traslado.TasaOCuotaDR).First().BaseP += traslado.BaseDR;
+                            traslados_p.Where(x => x.TasaOCuotaP == traslado.TasaOCuotaDR).First().ImporteP += traslado.ImporteDR;
+                        }
+                        else
+                        {
+                            PagosPagoImpuestosPTrasladoP traslado_p = new PagosPagoImpuestosPTrasladoP
+                            {
+                                BaseP = traslado.BaseDR,
+                                ImpuestoP = traslado.ImpuestoDR,
+                                TipoFactorP = traslado.TipoFactorDR,
+                                TasaOCuotaP = traslado.TasaOCuotaDR,
+                                ImporteP = traslado.ImporteDR
+                            };
+
+                            traslados_p.Add(traslado_p);
+                        }
+                            
+                    }
+
+                    complemento_pago.ImpuestosP = new PagosPagoImpuestosP();
+                    complemento_pago.ImpuestosP.TrasladosP = traslados_p.ToArray();
+
+                    if (complemento_pago.MonedaP != "MXN")
+                    {
+                        complemento_pago.TipoCambioP = Math.Round(pago.tipo_cambio, 4);
+                        complemento_pago.Monto = Math.Round(traslados_p.Sum(x => x.BaseP + x.ImporteP), 2);
+                    }
+                    else
+                    {
+                        complemento_pago.TipoCambioP = 1;
+                        complemento_pago.Monto = Math.Round(traslados_p.Sum(x => x.BaseP + x.ImporteP), 2);
+                    }
+
                     complemento_pagos.Pago = new PagosPago[] { complemento_pago };
+
+                    //Asigna los impuestos al documento
+                    complemento_pagos.Totales.TotalTrasladosBaseIVA16 = Math.Round(traslados_p.Where(x => x.TipoFactorP == "Tasa" && x.ImpuestoP == "002" && x.TasaOCuotaP == 0.16M).Sum(x => x.BaseP), 2);
+                    complemento_pagos.Totales.TotalTrasladosImpuestoIVA16 = Math.Round(traslados_p.Where(x => x.TipoFactorP == "Tasa" && x.ImpuestoP == "002" && x.TasaOCuotaP == 0.16M).Sum(x => x.ImporteP), 2);
+                    if (complemento_pagos.Totales.TotalTrasladosBaseIVA16 > 0)
+                    {
+                        complemento_pagos.Totales.TotalTrasladosBaseIVA16Specified = true;
+                        complemento_pagos.Totales.TotalTrasladosImpuestoIVA16Specified = true;
+                    }
+
+                    complemento_pagos.Totales.TotalTrasladosBaseIVA0 = Math.Round(traslados_p.Where(x => x.TipoFactorP == "Tasa" && x.ImpuestoP == "002" && x.TasaOCuotaP == 0.0M).Sum(x => x.BaseP), 2);
+                    complemento_pagos.Totales.TotalTrasladosImpuestoIVA0 = Math.Round(traslados_p.Where(x => x.TipoFactorP == "Tasa" && x.ImpuestoP == "002" && x.TasaOCuotaP == 0.0M).Sum(x => x.ImporteP), 2);
+                    if (complemento_pagos.Totales.TotalTrasladosBaseIVA0 > 0)
+                    {
+                        complemento_pagos.Totales.TotalTrasladosBaseIVA0Specified = true;
+                        complemento_pagos.Totales.TotalTrasladosImpuestoIVA0Specified = true;
+                    }
+
+                    complemento_pagos.Totales.TotalTrasladosBaseIVA8 = Math.Round(traslados_p.Where(x => x.TipoFactorP == "Tasa" && x.ImpuestoP == "002" && x.TasaOCuotaP == 0.08M).Sum(x => x.BaseP), 2);
+                    complemento_pagos.Totales.TotalTrasladosImpuestoIVA8 = Math.Round(traslados_p.Where(x => x.TipoFactorP == "Tasa" && x.ImpuestoP == "002" && x.TasaOCuotaP == 0.08M).Sum(x => x.ImporteP), 2);
+                    if (complemento_pagos.Totales.TotalTrasladosBaseIVA8 > 0)
+                    {
+                        complemento_pagos.Totales.TotalTrasladosBaseIVA8Specified = true;
+                        complemento_pagos.Totales.TotalTrasladosImpuestoIVA8Specified = true;
+                    }
+
+                    complemento_pagos.Totales.MontoTotalPagos = Math.Round(complemento_pagos.Pago.Sum(x => x.Monto), 2);
 
                     complemento.Any = new XmlElement[] { GenerarComplementoPago(complemento_pagos) };
                     complementos.Add(complemento);
-                    comprobante.Complemento = complementos.ToArray();
+                    comprobante.Complemento = complementos.First();
 
                     //Cadena original y sello
                     string cadena_original = string.Empty;
-                    string ruta_xsl = directorio_xml + @"\cadenaoriginal_3_3.xslt";
+                    string ruta_xsl = directorio_xml + @"\cadenaoriginal_4_0.xslt";
 
                     GenerarXML(comprobante, ruta_xml);
 
@@ -966,7 +1122,7 @@ namespace NoriCFDI
                         Localidad = origen.ciudad,
                         Municipio = origen.municipio,
                         Estado = origen.CodigoEstado(),
-                        Pais = c_Pais.MEX,
+                        Pais = "MEX",
                         CodigoPostal = origen.cp
                     };
 
@@ -991,7 +1147,7 @@ namespace NoriCFDI
                         Localidad = direccion.ciudad,
                         Municipio = direccion.municipio,
                         Estado = direccion.CodigoEstado(),
-                        Pais = c_Pais.MEX,
+                        Pais = "MEX",
                         CodigoPostal = direccion.cp
                     };
 
@@ -1027,11 +1183,10 @@ namespace NoriCFDI
                     {
                         mercancia.ClaveUnidad = (partida.clave_unidad.Length <= 3) ? articulo.clave_unidad : "H87";
                     }
-
                     mercancia.MaterialPeligroso = CartaPorteMercanciasMercanciaMaterialPeligroso.No;
                     mercancia.PesoEnKg = Math.Round(partida.cantidad * articulo.peso, 2);
                     mercancia.ValorMercancia = Math.Round(partida.precio * partida.tipo_cambio, 2);
-                    mercancia.Moneda = c_Moneda.MXN;
+                    mercancia.Moneda = "MXN";
 
                     carta_porte.Mercancias.Mercancia[mercancias] = mercancia;
                     peso_bruto += mercancia.PesoEnKg;
@@ -1092,16 +1247,16 @@ namespace NoriCFDI
         {
             XmlSerializerNamespaces oXmlNameSpace = new XmlSerializerNamespaces();
 
-            oXmlNameSpace.Add("cfdi", "http://www.sat.gob.mx/cfd/3");
+            oXmlNameSpace.Add("cfdi", "http://www.sat.gob.mx/cfd/4");
             oXmlNameSpace.Add("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
             oXmlNameSpace.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 
             try
             {
-                if (comprobante.Complemento.Count() > 0)
+                if (!comprobante.Complemento.IsNullOrEmpty())
                 {
                     if (comprobante.TipoDeComprobante == "P")
-                        oXmlNameSpace.Add("pago10", "http://www.sat.gob.mx/Pagos");
+                        oXmlNameSpace.Add("pago20", "http://www.sat.gob.mx/Pagos20");
                     else if (comprobante.TipoDeComprobante == "T")
                         oXmlNameSpace.Add("cartaporte20", "http://www.sat.gob.mx/CartaPorte20");
                 }
@@ -1127,7 +1282,7 @@ namespace NoriCFDI
         {
             XmlDocument oXmlDocument = new XmlDocument();
             XmlSerializerNamespaces oXmlNameSpace = new XmlSerializerNamespaces();
-            oXmlNameSpace.Add("pago10", "http://www.sat.gob.mx/Pagos");
+            oXmlNameSpace.Add("pago20", "http://www.sat.gob.mx/Pagos20");
 
             using (XmlWriter writer = oXmlDocument.CreateNavigator().AppendChild())
             {
@@ -1138,7 +1293,6 @@ namespace NoriCFDI
 
             return oXmlDocument.DocumentElement;
         }
-
         public static XmlElement GenerarComplementoCartaPorte(CartaPorte complemento)
         {
             XmlDocument oXmlDocument = new XmlDocument();
