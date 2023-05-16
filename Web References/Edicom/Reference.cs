@@ -23,33 +23,35 @@ namespace NoriCFDI.Edicom {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="CFDiSoapBinding", Namespace="http://cfdi.service.ediwinws.edicom.com")]
     public partial class CFDiService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback getCfdiAckOperationCompleted;
+        private System.Threading.SendOrPostCallback changePasswordOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getCFDiStatusOperationCompleted;
+        private System.Threading.SendOrPostCallback getUUIDOperationCompleted;
         
-        private System.Threading.SendOrPostCallback cancelaCFDiOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback cancelCFDiAsyncOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getUUIDTestOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getCfdiTestOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getCfdiFromUUIDOperationCompleted;
+        private System.Threading.SendOrPostCallback getCfdiOperationCompleted;
         
         private System.Threading.SendOrPostCallback getTimbreCfdiOperationCompleted;
         
+        private System.Threading.SendOrPostCallback cancelaCFDiOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getCfdiTestOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getTimbreCfdiTestOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getUUIDTestOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback cancelaCFDiSignedOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getCfdiAckOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getCfdiFromUUIDOperationCompleted;
+        
         private System.Threading.SendOrPostCallback exportCfdiOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getCfdiRetencionesOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback getTimbreCfdiRetencionesOperationCompleted;
         
         private System.Threading.SendOrPostCallback getCfdiRetencionesTestOperationCompleted;
         
@@ -61,15 +63,17 @@ namespace NoriCFDI.Edicom {
         
         private System.Threading.SendOrPostCallback cancelCFDiSignedAsyncOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getTimbreCfdiTestOperationCompleted;
+        private System.Threading.SendOrPostCallback getCFDiStatusOperationCompleted;
         
-        private System.Threading.SendOrPostCallback cancelaCFDiSignedOperationCompleted;
+        private System.Threading.SendOrPostCallback cancelCFDiAsyncOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getCfdiOperationCompleted;
+        private System.Threading.SendOrPostCallback getCfdiExtOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getUUIDOperationCompleted;
+        private System.Threading.SendOrPostCallback getCfdiExtTestOperationCompleted;
         
-        private System.Threading.SendOrPostCallback changePasswordOperationCompleted;
+        private System.Threading.SendOrPostCallback getTimbreCfdiRetencionesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getCfdiRetencionesOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -110,37 +114,40 @@ namespace NoriCFDI.Edicom {
         }
         
         /// <remarks/>
-        public event getCfdiAckCompletedEventHandler getCfdiAckCompleted;
+        public event changePasswordCompletedEventHandler changePasswordCompleted;
         
         /// <remarks/>
-        public event getCFDiStatusCompletedEventHandler getCFDiStatusCompleted;
+        public event getUUIDCompletedEventHandler getUUIDCompleted;
         
         /// <remarks/>
-        public event cancelaCFDiCompletedEventHandler cancelaCFDiCompleted;
-        
-        /// <remarks/>
-        public event cancelCFDiAsyncCompletedEventHandler cancelCFDiAsyncCompleted;
-        
-        /// <remarks/>
-        public event getUUIDTestCompletedEventHandler getUUIDTestCompleted;
-        
-        /// <remarks/>
-        public event getCfdiTestCompletedEventHandler getCfdiTestCompleted;
-        
-        /// <remarks/>
-        public event getCfdiFromUUIDCompletedEventHandler getCfdiFromUUIDCompleted;
+        public event getCfdiCompletedEventHandler getCfdiCompleted;
         
         /// <remarks/>
         public event getTimbreCfdiCompletedEventHandler getTimbreCfdiCompleted;
         
         /// <remarks/>
+        public event cancelaCFDiCompletedEventHandler cancelaCFDiCompleted;
+        
+        /// <remarks/>
+        public event getCfdiTestCompletedEventHandler getCfdiTestCompleted;
+        
+        /// <remarks/>
+        public event getTimbreCfdiTestCompletedEventHandler getTimbreCfdiTestCompleted;
+        
+        /// <remarks/>
+        public event getUUIDTestCompletedEventHandler getUUIDTestCompleted;
+        
+        /// <remarks/>
+        public event cancelaCFDiSignedCompletedEventHandler cancelaCFDiSignedCompleted;
+        
+        /// <remarks/>
+        public event getCfdiAckCompletedEventHandler getCfdiAckCompleted;
+        
+        /// <remarks/>
+        public event getCfdiFromUUIDCompletedEventHandler getCfdiFromUUIDCompleted;
+        
+        /// <remarks/>
         public event exportCfdiCompletedEventHandler exportCfdiCompleted;
-        
-        /// <remarks/>
-        public event getCfdiRetencionesCompletedEventHandler getCfdiRetencionesCompleted;
-        
-        /// <remarks/>
-        public event getTimbreCfdiRetencionesCompletedEventHandler getTimbreCfdiRetencionesCompleted;
         
         /// <remarks/>
         public event getCfdiRetencionesTestCompletedEventHandler getCfdiRetencionesTestCompleted;
@@ -158,117 +165,182 @@ namespace NoriCFDI.Edicom {
         public event cancelCFDiSignedAsyncCompletedEventHandler cancelCFDiSignedAsyncCompleted;
         
         /// <remarks/>
-        public event getTimbreCfdiTestCompletedEventHandler getTimbreCfdiTestCompleted;
+        public event getCFDiStatusCompletedEventHandler getCFDiStatusCompleted;
         
         /// <remarks/>
-        public event cancelaCFDiSignedCompletedEventHandler cancelaCFDiSignedCompleted;
+        public event cancelCFDiAsyncCompletedEventHandler cancelCFDiAsyncCompleted;
         
         /// <remarks/>
-        public event getCfdiCompletedEventHandler getCfdiCompleted;
+        public event getCfdiExtCompletedEventHandler getCfdiExtCompleted;
         
         /// <remarks/>
-        public event getUUIDCompletedEventHandler getUUIDCompleted;
+        public event getCfdiExtTestCompletedEventHandler getCfdiExtTestCompleted;
         
         /// <remarks/>
-        public event changePasswordCompletedEventHandler changePasswordCompleted;
+        public event getTimbreCfdiRetencionesCompletedEventHandler getTimbreCfdiRetencionesCompleted;
+        
+        /// <remarks/>
+        public event getCfdiRetencionesCompletedEventHandler getCfdiRetencionesCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("getCfdiAckReturn", DataType="base64Binary")]
-        public byte[] getCfdiAck(string user, string password, [System.Xml.Serialization.XmlElementAttribute("uuid")] string[] uuid) {
-            object[] results = this.Invoke("getCfdiAck", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("changePasswordReturn")]
+        public bool changePassword(string user, string password, string newPassword) {
+            object[] results = this.Invoke("changePassword", new object[] {
                         user,
                         password,
-                        uuid});
+                        newPassword});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void changePasswordAsync(string user, string password, string newPassword) {
+            this.changePasswordAsync(user, password, newPassword, null);
+        }
+        
+        /// <remarks/>
+        public void changePasswordAsync(string user, string password, string newPassword, object userState) {
+            if ((this.changePasswordOperationCompleted == null)) {
+                this.changePasswordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnchangePasswordOperationCompleted);
+            }
+            this.InvokeAsync("changePassword", new object[] {
+                        user,
+                        password,
+                        newPassword}, this.changePasswordOperationCompleted, userState);
+        }
+        
+        private void OnchangePasswordOperationCompleted(object arg) {
+            if ((this.changePasswordCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.changePasswordCompleted(this, new changePasswordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("getUUIDReturn")]
+        public string getUUID(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
+            object[] results = this.Invoke("getUUID", new object[] {
+                        user,
+                        password,
+                        file});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getUUIDAsync(string user, string password, byte[] file) {
+            this.getUUIDAsync(user, password, file, null);
+        }
+        
+        /// <remarks/>
+        public void getUUIDAsync(string user, string password, byte[] file, object userState) {
+            if ((this.getUUIDOperationCompleted == null)) {
+                this.getUUIDOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetUUIDOperationCompleted);
+            }
+            this.InvokeAsync("getUUID", new object[] {
+                        user,
+                        password,
+                        file}, this.getUUIDOperationCompleted, userState);
+        }
+        
+        private void OngetUUIDOperationCompleted(object arg) {
+            if ((this.getUUIDCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getUUIDCompleted(this, new getUUIDCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("getCfdiReturn", DataType="base64Binary")]
+        public byte[] getCfdi(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
+            object[] results = this.Invoke("getCfdi", new object[] {
+                        user,
+                        password,
+                        file});
             return ((byte[])(results[0]));
         }
         
         /// <remarks/>
-        public void getCfdiAckAsync(string user, string password, string[] uuid) {
-            this.getCfdiAckAsync(user, password, uuid, null);
+        public void getCfdiAsync(string user, string password, byte[] file) {
+            this.getCfdiAsync(user, password, file, null);
         }
         
         /// <remarks/>
-        public void getCfdiAckAsync(string user, string password, string[] uuid, object userState) {
-            if ((this.getCfdiAckOperationCompleted == null)) {
-                this.getCfdiAckOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCfdiAckOperationCompleted);
+        public void getCfdiAsync(string user, string password, byte[] file, object userState) {
+            if ((this.getCfdiOperationCompleted == null)) {
+                this.getCfdiOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCfdiOperationCompleted);
             }
-            this.InvokeAsync("getCfdiAck", new object[] {
+            this.InvokeAsync("getCfdi", new object[] {
                         user,
                         password,
-                        uuid}, this.getCfdiAckOperationCompleted, userState);
+                        file}, this.getCfdiOperationCompleted, userState);
         }
         
-        private void OngetCfdiAckOperationCompleted(object arg) {
-            if ((this.getCfdiAckCompleted != null)) {
+        private void OngetCfdiOperationCompleted(object arg) {
+            if ((this.getCfdiCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getCfdiAckCompleted(this, new getCfdiAckCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getCfdiCompleted(this, new getCfdiCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("getCFDiStatusReturn")]
-        public CancelQueryData getCFDiStatus(string user, string password, string rfcE, string rfcR, string uuid, double total, bool test) {
-            object[] results = this.Invoke("getCFDiStatus", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("getTimbreCfdiReturn", DataType="base64Binary")]
+        public byte[] getTimbreCfdi(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
+            object[] results = this.Invoke("getTimbreCfdi", new object[] {
                         user,
                         password,
-                        rfcE,
-                        rfcR,
-                        uuid,
-                        total,
-                        test});
-            return ((CancelQueryData)(results[0]));
+                        file});
+            return ((byte[])(results[0]));
         }
         
         /// <remarks/>
-        public void getCFDiStatusAsync(string user, string password, string rfcE, string rfcR, string uuid, double total, bool test) {
-            this.getCFDiStatusAsync(user, password, rfcE, rfcR, uuid, total, test, null);
+        public void getTimbreCfdiAsync(string user, string password, byte[] file) {
+            this.getTimbreCfdiAsync(user, password, file, null);
         }
         
         /// <remarks/>
-        public void getCFDiStatusAsync(string user, string password, string rfcE, string rfcR, string uuid, double total, bool test, object userState) {
-            if ((this.getCFDiStatusOperationCompleted == null)) {
-                this.getCFDiStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCFDiStatusOperationCompleted);
+        public void getTimbreCfdiAsync(string user, string password, byte[] file, object userState) {
+            if ((this.getTimbreCfdiOperationCompleted == null)) {
+                this.getTimbreCfdiOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetTimbreCfdiOperationCompleted);
             }
-            this.InvokeAsync("getCFDiStatus", new object[] {
+            this.InvokeAsync("getTimbreCfdi", new object[] {
                         user,
                         password,
-                        rfcE,
-                        rfcR,
-                        uuid,
-                        total,
-                        test}, this.getCFDiStatusOperationCompleted, userState);
+                        file}, this.getTimbreCfdiOperationCompleted, userState);
         }
         
-        private void OngetCFDiStatusOperationCompleted(object arg) {
-            if ((this.getCFDiStatusCompleted != null)) {
+        private void OngetTimbreCfdiOperationCompleted(object arg) {
+            if ((this.getTimbreCfdiCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getCFDiStatusCompleted(this, new getCFDiStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getTimbreCfdiCompleted(this, new getTimbreCfdiCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("cancelaCFDiReturn")]
-        public CancelaResponse cancelaCFDi(string user, string password, string rfc, [System.Xml.Serialization.XmlElementAttribute("uuid")] string[] uuid, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] pfx, string pfxPassword) {
+        public CancelaResponse cancelaCFDi(string user, string password, string rfc, [System.Xml.Serialization.XmlElementAttribute("uuid")] string[] uuid, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] pfx, string pfxPassword, string motivo, string sustitucion) {
             object[] results = this.Invoke("cancelaCFDi", new object[] {
                         user,
                         password,
                         rfc,
                         uuid,
                         pfx,
-                        pfxPassword});
+                        pfxPassword,
+                        motivo,
+                        sustitucion});
             return ((CancelaResponse)(results[0]));
         }
         
         /// <remarks/>
-        public void cancelaCFDiAsync(string user, string password, string rfc, string[] uuid, byte[] pfx, string pfxPassword) {
-            this.cancelaCFDiAsync(user, password, rfc, uuid, pfx, pfxPassword, null);
+        public void cancelaCFDiAsync(string user, string password, string rfc, string[] uuid, byte[] pfx, string pfxPassword, string motivo, string sustitucion) {
+            this.cancelaCFDiAsync(user, password, rfc, uuid, pfx, pfxPassword, motivo, sustitucion, null);
         }
         
         /// <remarks/>
-        public void cancelaCFDiAsync(string user, string password, string rfc, string[] uuid, byte[] pfx, string pfxPassword, object userState) {
+        public void cancelaCFDiAsync(string user, string password, string rfc, string[] uuid, byte[] pfx, string pfxPassword, string motivo, string sustitucion, object userState) {
             if ((this.cancelaCFDiOperationCompleted == null)) {
                 this.cancelaCFDiOperationCompleted = new System.Threading.SendOrPostCallback(this.OncancelaCFDiOperationCompleted);
             }
@@ -278,7 +350,9 @@ namespace NoriCFDI.Edicom {
                         rfc,
                         uuid,
                         pfx,
-                        pfxPassword}, this.cancelaCFDiOperationCompleted, userState);
+                        pfxPassword,
+                        motivo,
+                        sustitucion}, this.cancelaCFDiOperationCompleted, userState);
         }
         
         private void OncancelaCFDiOperationCompleted(object arg) {
@@ -290,47 +364,69 @@ namespace NoriCFDI.Edicom {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("cancelCFDiAsyncReturn")]
-        public CancelData cancelCFDiAsync(string user, string password, string rfcE, string rfcR, string uuid, double total, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] pfx, string pfxPassword, bool test) {
-            object[] results = this.Invoke("cancelCFDiAsync", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("getCfdiTestReturn", DataType="base64Binary")]
+        public byte[] getCfdiTest(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
+            object[] results = this.Invoke("getCfdiTest", new object[] {
                         user,
                         password,
-                        rfcE,
-                        rfcR,
-                        uuid,
-                        total,
-                        pfx,
-                        pfxPassword,
-                        test});
-            return ((CancelData)(results[0]));
+                        file});
+            return ((byte[])(results[0]));
         }
         
         /// <remarks/>
-        public void cancelCFDiAsyncAsync(string user, string password, string rfcE, string rfcR, string uuid, double total, byte[] pfx, string pfxPassword, bool test) {
-            this.cancelCFDiAsyncAsync(user, password, rfcE, rfcR, uuid, total, pfx, pfxPassword, test, null);
+        public void getCfdiTestAsync(string user, string password, byte[] file) {
+            this.getCfdiTestAsync(user, password, file, null);
         }
         
         /// <remarks/>
-        public void cancelCFDiAsyncAsync(string user, string password, string rfcE, string rfcR, string uuid, double total, byte[] pfx, string pfxPassword, bool test, object userState) {
-            if ((this.cancelCFDiAsyncOperationCompleted == null)) {
-                this.cancelCFDiAsyncOperationCompleted = new System.Threading.SendOrPostCallback(this.OncancelCFDiAsyncOperationCompleted);
+        public void getCfdiTestAsync(string user, string password, byte[] file, object userState) {
+            if ((this.getCfdiTestOperationCompleted == null)) {
+                this.getCfdiTestOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCfdiTestOperationCompleted);
             }
-            this.InvokeAsync("cancelCFDiAsync", new object[] {
+            this.InvokeAsync("getCfdiTest", new object[] {
                         user,
                         password,
-                        rfcE,
-                        rfcR,
-                        uuid,
-                        total,
-                        pfx,
-                        pfxPassword,
-                        test}, this.cancelCFDiAsyncOperationCompleted, userState);
+                        file}, this.getCfdiTestOperationCompleted, userState);
         }
         
-        private void OncancelCFDiAsyncOperationCompleted(object arg) {
-            if ((this.cancelCFDiAsyncCompleted != null)) {
+        private void OngetCfdiTestOperationCompleted(object arg) {
+            if ((this.getCfdiTestCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.cancelCFDiAsyncCompleted(this, new cancelCFDiAsyncCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getCfdiTestCompleted(this, new getCfdiTestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("getTimbreCfdiTestReturn", DataType="base64Binary")]
+        public byte[] getTimbreCfdiTest(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
+            object[] results = this.Invoke("getTimbreCfdiTest", new object[] {
+                        user,
+                        password,
+                        file});
+            return ((byte[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getTimbreCfdiTestAsync(string user, string password, byte[] file) {
+            this.getTimbreCfdiTestAsync(user, password, file, null);
+        }
+        
+        /// <remarks/>
+        public void getTimbreCfdiTestAsync(string user, string password, byte[] file, object userState) {
+            if ((this.getTimbreCfdiTestOperationCompleted == null)) {
+                this.getTimbreCfdiTestOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetTimbreCfdiTestOperationCompleted);
+            }
+            this.InvokeAsync("getTimbreCfdiTest", new object[] {
+                        user,
+                        password,
+                        file}, this.getTimbreCfdiTestOperationCompleted, userState);
+        }
+        
+        private void OngetTimbreCfdiTestOperationCompleted(object arg) {
+            if ((this.getTimbreCfdiTestCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getTimbreCfdiTestCompleted(this, new getTimbreCfdiTestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -370,35 +466,69 @@ namespace NoriCFDI.Edicom {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("getCfdiTestReturn", DataType="base64Binary")]
-        public byte[] getCfdiTest(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
-            object[] results = this.Invoke("getCfdiTest", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("cancelaCFDiSignedReturn")]
+        public CancelaResponse cancelaCFDiSigned(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] sign) {
+            object[] results = this.Invoke("cancelaCFDiSigned", new object[] {
                         user,
                         password,
-                        file});
+                        sign});
+            return ((CancelaResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void cancelaCFDiSignedAsync(string user, string password, byte[] sign) {
+            this.cancelaCFDiSignedAsync(user, password, sign, null);
+        }
+        
+        /// <remarks/>
+        public void cancelaCFDiSignedAsync(string user, string password, byte[] sign, object userState) {
+            if ((this.cancelaCFDiSignedOperationCompleted == null)) {
+                this.cancelaCFDiSignedOperationCompleted = new System.Threading.SendOrPostCallback(this.OncancelaCFDiSignedOperationCompleted);
+            }
+            this.InvokeAsync("cancelaCFDiSigned", new object[] {
+                        user,
+                        password,
+                        sign}, this.cancelaCFDiSignedOperationCompleted, userState);
+        }
+        
+        private void OncancelaCFDiSignedOperationCompleted(object arg) {
+            if ((this.cancelaCFDiSignedCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.cancelaCFDiSignedCompleted(this, new cancelaCFDiSignedCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("getCfdiAckReturn", DataType="base64Binary")]
+        public byte[] getCfdiAck(string user, string password, [System.Xml.Serialization.XmlElementAttribute("uuid")] string[] uuid) {
+            object[] results = this.Invoke("getCfdiAck", new object[] {
+                        user,
+                        password,
+                        uuid});
             return ((byte[])(results[0]));
         }
         
         /// <remarks/>
-        public void getCfdiTestAsync(string user, string password, byte[] file) {
-            this.getCfdiTestAsync(user, password, file, null);
+        public void getCfdiAckAsync(string user, string password, string[] uuid) {
+            this.getCfdiAckAsync(user, password, uuid, null);
         }
         
         /// <remarks/>
-        public void getCfdiTestAsync(string user, string password, byte[] file, object userState) {
-            if ((this.getCfdiTestOperationCompleted == null)) {
-                this.getCfdiTestOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCfdiTestOperationCompleted);
+        public void getCfdiAckAsync(string user, string password, string[] uuid, object userState) {
+            if ((this.getCfdiAckOperationCompleted == null)) {
+                this.getCfdiAckOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCfdiAckOperationCompleted);
             }
-            this.InvokeAsync("getCfdiTest", new object[] {
+            this.InvokeAsync("getCfdiAck", new object[] {
                         user,
                         password,
-                        file}, this.getCfdiTestOperationCompleted, userState);
+                        uuid}, this.getCfdiAckOperationCompleted, userState);
         }
         
-        private void OngetCfdiTestOperationCompleted(object arg) {
-            if ((this.getCfdiTestCompleted != null)) {
+        private void OngetCfdiAckOperationCompleted(object arg) {
+            if ((this.getCfdiAckCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getCfdiTestCompleted(this, new getCfdiTestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getCfdiAckCompleted(this, new getCfdiAckCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -440,40 +570,6 @@ namespace NoriCFDI.Edicom {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("getTimbreCfdiReturn", DataType="base64Binary")]
-        public byte[] getTimbreCfdi(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
-            object[] results = this.Invoke("getTimbreCfdi", new object[] {
-                        user,
-                        password,
-                        file});
-            return ((byte[])(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getTimbreCfdiAsync(string user, string password, byte[] file) {
-            this.getTimbreCfdiAsync(user, password, file, null);
-        }
-        
-        /// <remarks/>
-        public void getTimbreCfdiAsync(string user, string password, byte[] file, object userState) {
-            if ((this.getTimbreCfdiOperationCompleted == null)) {
-                this.getTimbreCfdiOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetTimbreCfdiOperationCompleted);
-            }
-            this.InvokeAsync("getTimbreCfdi", new object[] {
-                        user,
-                        password,
-                        file}, this.getTimbreCfdiOperationCompleted, userState);
-        }
-        
-        private void OngetTimbreCfdiOperationCompleted(object arg) {
-            if ((this.getTimbreCfdiCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getTimbreCfdiCompleted(this, new getTimbreCfdiCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("exportCfdiReturn", DataType="base64Binary")]
         public byte[] exportCfdi(string user, string password, string rfc, System.DateTime iniDate, System.DateTime endDate) {
             object[] results = this.Invoke("exportCfdi", new object[] {
@@ -507,74 +603,6 @@ namespace NoriCFDI.Edicom {
             if ((this.exportCfdiCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.exportCfdiCompleted(this, new exportCfdiCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("getCfdiRetencionesReturn", DataType="base64Binary")]
-        public byte[] getCfdiRetenciones(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
-            object[] results = this.Invoke("getCfdiRetenciones", new object[] {
-                        user,
-                        password,
-                        file});
-            return ((byte[])(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getCfdiRetencionesAsync(string user, string password, byte[] file) {
-            this.getCfdiRetencionesAsync(user, password, file, null);
-        }
-        
-        /// <remarks/>
-        public void getCfdiRetencionesAsync(string user, string password, byte[] file, object userState) {
-            if ((this.getCfdiRetencionesOperationCompleted == null)) {
-                this.getCfdiRetencionesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCfdiRetencionesOperationCompleted);
-            }
-            this.InvokeAsync("getCfdiRetenciones", new object[] {
-                        user,
-                        password,
-                        file}, this.getCfdiRetencionesOperationCompleted, userState);
-        }
-        
-        private void OngetCfdiRetencionesOperationCompleted(object arg) {
-            if ((this.getCfdiRetencionesCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getCfdiRetencionesCompleted(this, new getCfdiRetencionesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("getTimbreCfdiRetencionesReturn", DataType="base64Binary")]
-        public byte[] getTimbreCfdiRetenciones(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
-            object[] results = this.Invoke("getTimbreCfdiRetenciones", new object[] {
-                        user,
-                        password,
-                        file});
-            return ((byte[])(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getTimbreCfdiRetencionesAsync(string user, string password, byte[] file) {
-            this.getTimbreCfdiRetencionesAsync(user, password, file, null);
-        }
-        
-        /// <remarks/>
-        public void getTimbreCfdiRetencionesAsync(string user, string password, byte[] file, object userState) {
-            if ((this.getTimbreCfdiRetencionesOperationCompleted == null)) {
-                this.getTimbreCfdiRetencionesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetTimbreCfdiRetencionesOperationCompleted);
-            }
-            this.InvokeAsync("getTimbreCfdiRetenciones", new object[] {
-                        user,
-                        password,
-                        file}, this.getTimbreCfdiRetencionesOperationCompleted, userState);
-        }
-        
-        private void OngetTimbreCfdiRetencionesOperationCompleted(object arg) {
-            if ((this.getTimbreCfdiRetencionesCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getTimbreCfdiRetencionesCompleted(this, new getTimbreCfdiRetencionesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -649,24 +677,26 @@ namespace NoriCFDI.Edicom {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("cancelaCFDiRetencionesReturn")]
-        public CancelaResponse cancelaCFDiRetenciones(string user, string password, string rfc, [System.Xml.Serialization.XmlElementAttribute("uuid")] string[] uuid, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] pfx, string pfxPassword) {
+        public CancelaResponse cancelaCFDiRetenciones(string user, string password, string rfc, [System.Xml.Serialization.XmlElementAttribute("uuid")] string[] uuid, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] pfx, string pfxPassword, string motivo, string sustitucion) {
             object[] results = this.Invoke("cancelaCFDiRetenciones", new object[] {
                         user,
                         password,
                         rfc,
                         uuid,
                         pfx,
-                        pfxPassword});
+                        pfxPassword,
+                        motivo,
+                        sustitucion});
             return ((CancelaResponse)(results[0]));
         }
         
         /// <remarks/>
-        public void cancelaCFDiRetencionesAsync(string user, string password, string rfc, string[] uuid, byte[] pfx, string pfxPassword) {
-            this.cancelaCFDiRetencionesAsync(user, password, rfc, uuid, pfx, pfxPassword, null);
+        public void cancelaCFDiRetencionesAsync(string user, string password, string rfc, string[] uuid, byte[] pfx, string pfxPassword, string motivo, string sustitucion) {
+            this.cancelaCFDiRetencionesAsync(user, password, rfc, uuid, pfx, pfxPassword, motivo, sustitucion, null);
         }
         
         /// <remarks/>
-        public void cancelaCFDiRetencionesAsync(string user, string password, string rfc, string[] uuid, byte[] pfx, string pfxPassword, object userState) {
+        public void cancelaCFDiRetencionesAsync(string user, string password, string rfc, string[] uuid, byte[] pfx, string pfxPassword, string motivo, string sustitucion, object userState) {
             if ((this.cancelaCFDiRetencionesOperationCompleted == null)) {
                 this.cancelaCFDiRetencionesOperationCompleted = new System.Threading.SendOrPostCallback(this.OncancelaCFDiRetencionesOperationCompleted);
             }
@@ -676,7 +706,9 @@ namespace NoriCFDI.Edicom {
                         rfc,
                         uuid,
                         pfx,
-                        pfxPassword}, this.cancelaCFDiRetencionesOperationCompleted, userState);
+                        pfxPassword,
+                        motivo,
+                        sustitucion}, this.cancelaCFDiRetencionesOperationCompleted, userState);
         }
         
         private void OncancelaCFDiRetencionesOperationCompleted(object arg) {
@@ -766,9 +798,101 @@ namespace NoriCFDI.Edicom {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("getTimbreCfdiTestReturn", DataType="base64Binary")]
-        public byte[] getTimbreCfdiTest(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
-            object[] results = this.Invoke("getTimbreCfdiTest", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("getCFDiStatusReturn")]
+        public CancelQueryData getCFDiStatus(string user, string password, string rfcE, string rfcR, string uuid, double total, bool test) {
+            object[] results = this.Invoke("getCFDiStatus", new object[] {
+                        user,
+                        password,
+                        rfcE,
+                        rfcR,
+                        uuid,
+                        total,
+                        test});
+            return ((CancelQueryData)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getCFDiStatusAsync(string user, string password, string rfcE, string rfcR, string uuid, double total, bool test) {
+            this.getCFDiStatusAsync(user, password, rfcE, rfcR, uuid, total, test, null);
+        }
+        
+        /// <remarks/>
+        public void getCFDiStatusAsync(string user, string password, string rfcE, string rfcR, string uuid, double total, bool test, object userState) {
+            if ((this.getCFDiStatusOperationCompleted == null)) {
+                this.getCFDiStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCFDiStatusOperationCompleted);
+            }
+            this.InvokeAsync("getCFDiStatus", new object[] {
+                        user,
+                        password,
+                        rfcE,
+                        rfcR,
+                        uuid,
+                        total,
+                        test}, this.getCFDiStatusOperationCompleted, userState);
+        }
+        
+        private void OngetCFDiStatusOperationCompleted(object arg) {
+            if ((this.getCFDiStatusCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getCFDiStatusCompleted(this, new getCFDiStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("cancelCFDiAsyncReturn")]
+        public CancelData cancelCFDiAsync(string user, string password, string rfcE, string rfcR, string uuid, double total, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] pfx, string pfxPassword, string motivo, string sustitucion, bool test) {
+            object[] results = this.Invoke("cancelCFDiAsync", new object[] {
+                        user,
+                        password,
+                        rfcE,
+                        rfcR,
+                        uuid,
+                        total,
+                        pfx,
+                        pfxPassword,
+                        motivo,
+                        sustitucion,
+                        test});
+            return ((CancelData)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void cancelCFDiAsyncAsync(string user, string password, string rfcE, string rfcR, string uuid, double total, byte[] pfx, string pfxPassword, string motivo, string sustitucion, bool test) {
+            this.cancelCFDiAsyncAsync(user, password, rfcE, rfcR, uuid, total, pfx, pfxPassword, motivo, sustitucion, test, null);
+        }
+        
+        /// <remarks/>
+        public void cancelCFDiAsyncAsync(string user, string password, string rfcE, string rfcR, string uuid, double total, byte[] pfx, string pfxPassword, string motivo, string sustitucion, bool test, object userState) {
+            if ((this.cancelCFDiAsyncOperationCompleted == null)) {
+                this.cancelCFDiAsyncOperationCompleted = new System.Threading.SendOrPostCallback(this.OncancelCFDiAsyncOperationCompleted);
+            }
+            this.InvokeAsync("cancelCFDiAsync", new object[] {
+                        user,
+                        password,
+                        rfcE,
+                        rfcR,
+                        uuid,
+                        total,
+                        pfx,
+                        pfxPassword,
+                        motivo,
+                        sustitucion,
+                        test}, this.cancelCFDiAsyncOperationCompleted, userState);
+        }
+        
+        private void OncancelCFDiAsyncOperationCompleted(object arg) {
+            if ((this.cancelCFDiAsyncCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.cancelCFDiAsyncCompleted(this, new cancelCFDiAsyncCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("getCfdiExtReturn", DataType="base64Binary")]
+        public byte[] getCfdiExt(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
+            object[] results = this.Invoke("getCfdiExt", new object[] {
                         user,
                         password,
                         file});
@@ -776,67 +900,33 @@ namespace NoriCFDI.Edicom {
         }
         
         /// <remarks/>
-        public void getTimbreCfdiTestAsync(string user, string password, byte[] file) {
-            this.getTimbreCfdiTestAsync(user, password, file, null);
+        public void getCfdiExtAsync(string user, string password, byte[] file) {
+            this.getCfdiExtAsync(user, password, file, null);
         }
         
         /// <remarks/>
-        public void getTimbreCfdiTestAsync(string user, string password, byte[] file, object userState) {
-            if ((this.getTimbreCfdiTestOperationCompleted == null)) {
-                this.getTimbreCfdiTestOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetTimbreCfdiTestOperationCompleted);
+        public void getCfdiExtAsync(string user, string password, byte[] file, object userState) {
+            if ((this.getCfdiExtOperationCompleted == null)) {
+                this.getCfdiExtOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCfdiExtOperationCompleted);
             }
-            this.InvokeAsync("getTimbreCfdiTest", new object[] {
+            this.InvokeAsync("getCfdiExt", new object[] {
                         user,
                         password,
-                        file}, this.getTimbreCfdiTestOperationCompleted, userState);
+                        file}, this.getCfdiExtOperationCompleted, userState);
         }
         
-        private void OngetTimbreCfdiTestOperationCompleted(object arg) {
-            if ((this.getTimbreCfdiTestCompleted != null)) {
+        private void OngetCfdiExtOperationCompleted(object arg) {
+            if ((this.getCfdiExtCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getTimbreCfdiTestCompleted(this, new getTimbreCfdiTestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getCfdiExtCompleted(this, new getCfdiExtCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("cancelaCFDiSignedReturn")]
-        public CancelaResponse cancelaCFDiSigned(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] sign) {
-            object[] results = this.Invoke("cancelaCFDiSigned", new object[] {
-                        user,
-                        password,
-                        sign});
-            return ((CancelaResponse)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void cancelaCFDiSignedAsync(string user, string password, byte[] sign) {
-            this.cancelaCFDiSignedAsync(user, password, sign, null);
-        }
-        
-        /// <remarks/>
-        public void cancelaCFDiSignedAsync(string user, string password, byte[] sign, object userState) {
-            if ((this.cancelaCFDiSignedOperationCompleted == null)) {
-                this.cancelaCFDiSignedOperationCompleted = new System.Threading.SendOrPostCallback(this.OncancelaCFDiSignedOperationCompleted);
-            }
-            this.InvokeAsync("cancelaCFDiSigned", new object[] {
-                        user,
-                        password,
-                        sign}, this.cancelaCFDiSignedOperationCompleted, userState);
-        }
-        
-        private void OncancelaCFDiSignedOperationCompleted(object arg) {
-            if ((this.cancelaCFDiSignedCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.cancelaCFDiSignedCompleted(this, new cancelaCFDiSignedCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("getCfdiReturn", DataType="base64Binary")]
-        public byte[] getCfdi(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
-            object[] results = this.Invoke("getCfdi", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("getCfdiExtTestReturn", DataType="base64Binary")]
+        public byte[] getCfdiExtTest(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
+            object[] results = this.Invoke("getCfdiExtTest", new object[] {
                         user,
                         password,
                         file});
@@ -844,93 +934,93 @@ namespace NoriCFDI.Edicom {
         }
         
         /// <remarks/>
-        public void getCfdiAsync(string user, string password, byte[] file) {
-            this.getCfdiAsync(user, password, file, null);
+        public void getCfdiExtTestAsync(string user, string password, byte[] file) {
+            this.getCfdiExtTestAsync(user, password, file, null);
         }
         
         /// <remarks/>
-        public void getCfdiAsync(string user, string password, byte[] file, object userState) {
-            if ((this.getCfdiOperationCompleted == null)) {
-                this.getCfdiOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCfdiOperationCompleted);
+        public void getCfdiExtTestAsync(string user, string password, byte[] file, object userState) {
+            if ((this.getCfdiExtTestOperationCompleted == null)) {
+                this.getCfdiExtTestOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCfdiExtTestOperationCompleted);
             }
-            this.InvokeAsync("getCfdi", new object[] {
+            this.InvokeAsync("getCfdiExtTest", new object[] {
                         user,
                         password,
-                        file}, this.getCfdiOperationCompleted, userState);
+                        file}, this.getCfdiExtTestOperationCompleted, userState);
         }
         
-        private void OngetCfdiOperationCompleted(object arg) {
-            if ((this.getCfdiCompleted != null)) {
+        private void OngetCfdiExtTestOperationCompleted(object arg) {
+            if ((this.getCfdiExtTestCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getCfdiCompleted(this, new getCfdiCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getCfdiExtTestCompleted(this, new getCfdiExtTestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("getUUIDReturn")]
-        public string getUUID(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
-            object[] results = this.Invoke("getUUID", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("getTimbreCfdiRetencionesReturn", DataType="base64Binary")]
+        public byte[] getTimbreCfdiRetenciones(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
+            object[] results = this.Invoke("getTimbreCfdiRetenciones", new object[] {
                         user,
                         password,
                         file});
-            return ((string)(results[0]));
+            return ((byte[])(results[0]));
         }
         
         /// <remarks/>
-        public void getUUIDAsync(string user, string password, byte[] file) {
-            this.getUUIDAsync(user, password, file, null);
+        public void getTimbreCfdiRetencionesAsync(string user, string password, byte[] file) {
+            this.getTimbreCfdiRetencionesAsync(user, password, file, null);
         }
         
         /// <remarks/>
-        public void getUUIDAsync(string user, string password, byte[] file, object userState) {
-            if ((this.getUUIDOperationCompleted == null)) {
-                this.getUUIDOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetUUIDOperationCompleted);
+        public void getTimbreCfdiRetencionesAsync(string user, string password, byte[] file, object userState) {
+            if ((this.getTimbreCfdiRetencionesOperationCompleted == null)) {
+                this.getTimbreCfdiRetencionesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetTimbreCfdiRetencionesOperationCompleted);
             }
-            this.InvokeAsync("getUUID", new object[] {
+            this.InvokeAsync("getTimbreCfdiRetenciones", new object[] {
                         user,
                         password,
-                        file}, this.getUUIDOperationCompleted, userState);
+                        file}, this.getTimbreCfdiRetencionesOperationCompleted, userState);
         }
         
-        private void OngetUUIDOperationCompleted(object arg) {
-            if ((this.getUUIDCompleted != null)) {
+        private void OngetTimbreCfdiRetencionesOperationCompleted(object arg) {
+            if ((this.getTimbreCfdiRetencionesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getUUIDCompleted(this, new getUUIDCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getTimbreCfdiRetencionesCompleted(this, new getTimbreCfdiRetencionesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace="http://cfdi.service.ediwinws.edicom.com", ResponseNamespace="http://cfdi.service.ediwinws.edicom.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("changePasswordReturn")]
-        public bool changePassword(string user, string password, string newPassword) {
-            object[] results = this.Invoke("changePassword", new object[] {
+        [return: System.Xml.Serialization.XmlElementAttribute("getCfdiRetencionesReturn", DataType="base64Binary")]
+        public byte[] getCfdiRetenciones(string user, string password, [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] file) {
+            object[] results = this.Invoke("getCfdiRetenciones", new object[] {
                         user,
                         password,
-                        newPassword});
-            return ((bool)(results[0]));
+                        file});
+            return ((byte[])(results[0]));
         }
         
         /// <remarks/>
-        public void changePasswordAsync(string user, string password, string newPassword) {
-            this.changePasswordAsync(user, password, newPassword, null);
+        public void getCfdiRetencionesAsync(string user, string password, byte[] file) {
+            this.getCfdiRetencionesAsync(user, password, file, null);
         }
         
         /// <remarks/>
-        public void changePasswordAsync(string user, string password, string newPassword, object userState) {
-            if ((this.changePasswordOperationCompleted == null)) {
-                this.changePasswordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnchangePasswordOperationCompleted);
+        public void getCfdiRetencionesAsync(string user, string password, byte[] file, object userState) {
+            if ((this.getCfdiRetencionesOperationCompleted == null)) {
+                this.getCfdiRetencionesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCfdiRetencionesOperationCompleted);
             }
-            this.InvokeAsync("changePassword", new object[] {
+            this.InvokeAsync("getCfdiRetenciones", new object[] {
                         user,
                         password,
-                        newPassword}, this.changePasswordOperationCompleted, userState);
+                        file}, this.getCfdiRetencionesOperationCompleted, userState);
         }
         
-        private void OnchangePasswordOperationCompleted(object arg) {
-            if ((this.changePasswordCompleted != null)) {
+        private void OngetCfdiRetencionesOperationCompleted(object arg) {
+            if ((this.getCfdiRetencionesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.changePasswordCompleted(this, new changePasswordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getCfdiRetencionesCompleted(this, new getCfdiRetencionesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -954,7 +1044,56 @@ namespace NoriCFDI.Edicom {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4161.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://cfdi.service.ediwinws.edicom.com")]
+    public partial class CancelaResponse {
+        
+        private string ackField;
+        
+        private string textField;
+        
+        private string[] uuidsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ack {
+            get {
+                return this.ackField;
+            }
+            set {
+                this.ackField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("item", IsNullable=false)]
+        public string[] uuids {
+            get {
+                return this.uuidsField;
+            }
+            set {
+                this.uuidsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4161.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1015,7 +1154,7 @@ namespace NoriCFDI.Edicom {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4161.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1102,554 +1241,37 @@ namespace NoriCFDI.Edicom {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://cfdi.service.ediwinws.edicom.com")]
-    public partial class CancelaResponse {
-        
-        private string ackField;
-        
-        private string textField;
-        
-        private string[] uuidsField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ack {
-            get {
-                return this.ackField;
-            }
-            set {
-                this.ackField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", IsNullable=false)]
-        public string[] uuids {
-            get {
-                return this.uuidsField;
-            }
-            set {
-                this.uuidsField = value;
-            }
-        }
-    }
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void changePasswordCompletedEventHandler(object sender, changePasswordCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getCfdiAckCompletedEventHandler(object sender, getCfdiAckCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getCfdiAckCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class changePasswordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal getCfdiAckCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal changePasswordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public byte[] Result {
+        public bool Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
+                return ((bool)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getCFDiStatusCompletedEventHandler(object sender, getCFDiStatusCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getCFDiStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getCFDiStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public CancelQueryData Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((CancelQueryData)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void cancelaCFDiCompletedEventHandler(object sender, cancelaCFDiCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class cancelaCFDiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal cancelaCFDiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public CancelaResponse Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((CancelaResponse)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void cancelCFDiAsyncCompletedEventHandler(object sender, cancelCFDiAsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class cancelCFDiAsyncCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal cancelCFDiAsyncCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public CancelData Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((CancelData)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getUUIDTestCompletedEventHandler(object sender, getUUIDTestCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getUUIDTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getUUIDTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getCfdiTestCompletedEventHandler(object sender, getCfdiTestCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getCfdiTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getCfdiTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public byte[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getCfdiFromUUIDCompletedEventHandler(object sender, getCfdiFromUUIDCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getCfdiFromUUIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getCfdiFromUUIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public byte[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getTimbreCfdiCompletedEventHandler(object sender, getTimbreCfdiCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getTimbreCfdiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getTimbreCfdiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public byte[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void exportCfdiCompletedEventHandler(object sender, exportCfdiCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class exportCfdiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal exportCfdiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public byte[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getCfdiRetencionesCompletedEventHandler(object sender, getCfdiRetencionesCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getCfdiRetencionesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getCfdiRetencionesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public byte[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getTimbreCfdiRetencionesCompletedEventHandler(object sender, getTimbreCfdiRetencionesCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getTimbreCfdiRetencionesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getTimbreCfdiRetencionesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public byte[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getCfdiRetencionesTestCompletedEventHandler(object sender, getCfdiRetencionesTestCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getCfdiRetencionesTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getCfdiRetencionesTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public byte[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getTimbreCfdiRetencionesTestCompletedEventHandler(object sender, getTimbreCfdiRetencionesTestCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getTimbreCfdiRetencionesTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getTimbreCfdiRetencionesTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public byte[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void cancelaCFDiRetencionesCompletedEventHandler(object sender, cancelaCFDiRetencionesCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class cancelaCFDiRetencionesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal cancelaCFDiRetencionesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public CancelaResponse Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((CancelaResponse)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void cancelaCFDiRetencionesSignedCompletedEventHandler(object sender, cancelaCFDiRetencionesSignedCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class cancelaCFDiRetencionesSignedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal cancelaCFDiRetencionesSignedCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public CancelaResponse Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((CancelaResponse)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void cancelCFDiSignedAsyncCompletedEventHandler(object sender, cancelCFDiSignedAsyncCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class cancelCFDiSignedAsyncCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal cancelCFDiSignedAsyncCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public CancelData Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((CancelData)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getTimbreCfdiTestCompletedEventHandler(object sender, getTimbreCfdiTestCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getTimbreCfdiTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getTimbreCfdiTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public byte[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void cancelaCFDiSignedCompletedEventHandler(object sender, cancelaCFDiSignedCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class cancelaCFDiSignedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal cancelaCFDiSignedCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public CancelaResponse Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((CancelaResponse)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void getCfdiCompletedEventHandler(object sender, getCfdiCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getCfdiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getCfdiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public byte[] Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((byte[])(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     public delegate void getUUIDCompletedEventHandler(object sender, getUUIDCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getUUIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1671,27 +1293,547 @@ namespace NoriCFDI.Edicom {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void changePasswordCompletedEventHandler(object sender, changePasswordCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getCfdiCompletedEventHandler(object sender, getCfdiCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class changePasswordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class getCfdiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal changePasswordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal getCfdiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public bool Result {
+        public byte[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getTimbreCfdiCompletedEventHandler(object sender, getTimbreCfdiCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getTimbreCfdiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getTimbreCfdiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void cancelaCFDiCompletedEventHandler(object sender, cancelaCFDiCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class cancelaCFDiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal cancelaCFDiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CancelaResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CancelaResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getCfdiTestCompletedEventHandler(object sender, getCfdiTestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getCfdiTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getCfdiTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getTimbreCfdiTestCompletedEventHandler(object sender, getTimbreCfdiTestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getTimbreCfdiTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getTimbreCfdiTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getUUIDTestCompletedEventHandler(object sender, getUUIDTestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getUUIDTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getUUIDTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void cancelaCFDiSignedCompletedEventHandler(object sender, cancelaCFDiSignedCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class cancelaCFDiSignedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal cancelaCFDiSignedCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CancelaResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CancelaResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getCfdiAckCompletedEventHandler(object sender, getCfdiAckCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getCfdiAckCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getCfdiAckCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getCfdiFromUUIDCompletedEventHandler(object sender, getCfdiFromUUIDCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getCfdiFromUUIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getCfdiFromUUIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void exportCfdiCompletedEventHandler(object sender, exportCfdiCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class exportCfdiCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal exportCfdiCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getCfdiRetencionesTestCompletedEventHandler(object sender, getCfdiRetencionesTestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getCfdiRetencionesTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getCfdiRetencionesTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getTimbreCfdiRetencionesTestCompletedEventHandler(object sender, getTimbreCfdiRetencionesTestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getTimbreCfdiRetencionesTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getTimbreCfdiRetencionesTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void cancelaCFDiRetencionesCompletedEventHandler(object sender, cancelaCFDiRetencionesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class cancelaCFDiRetencionesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal cancelaCFDiRetencionesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CancelaResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CancelaResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void cancelaCFDiRetencionesSignedCompletedEventHandler(object sender, cancelaCFDiRetencionesSignedCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class cancelaCFDiRetencionesSignedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal cancelaCFDiRetencionesSignedCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CancelaResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CancelaResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void cancelCFDiSignedAsyncCompletedEventHandler(object sender, cancelCFDiSignedAsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class cancelCFDiSignedAsyncCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal cancelCFDiSignedAsyncCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CancelData Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CancelData)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getCFDiStatusCompletedEventHandler(object sender, getCFDiStatusCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getCFDiStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getCFDiStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CancelQueryData Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CancelQueryData)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void cancelCFDiAsyncCompletedEventHandler(object sender, cancelCFDiAsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class cancelCFDiAsyncCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal cancelCFDiAsyncCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CancelData Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CancelData)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getCfdiExtCompletedEventHandler(object sender, getCfdiExtCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getCfdiExtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getCfdiExtCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getCfdiExtTestCompletedEventHandler(object sender, getCfdiExtTestCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getCfdiExtTestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getCfdiExtTestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getTimbreCfdiRetencionesCompletedEventHandler(object sender, getTimbreCfdiRetencionesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getTimbreCfdiRetencionesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getTimbreCfdiRetencionesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    public delegate void getCfdiRetencionesCompletedEventHandler(object sender, getCfdiRetencionesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getCfdiRetencionesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getCfdiRetencionesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public byte[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
             }
         }
     }

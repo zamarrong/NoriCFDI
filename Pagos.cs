@@ -11,7 +11,7 @@
 // 
 // Este código fuente fue generado automáticamente por xsd, Versión=4.0.30319.1.
 // 
-namespace NoriCFDI
+namespace NoriCFDI_
 {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
